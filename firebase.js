@@ -1,5 +1,6 @@
 import firebase from "firebase";
 
+
 const firebaseConfig = {
   apiKey: "AIzaSyBKZMxvBl2jLp4-q0s-t3ZUWdywLynhnwg",
   authDomain: "whatsapp-cln-94fcc.firebaseapp.com",
@@ -18,3 +19,4 @@ const auth = app.auth();
 const provider = new firebase.auth.GoogleAuthProvider();
 
 export { db, auth, provider };
+

@@ -76,7 +76,7 @@ function Sidebar() {
       <SidebarButton onClick={createchat}>Start a new chat</SidebarButton>
       <div className="flex flex-col ">
         {chatsSnapshot?.docs.map((chat) => (
-          <Chat key={chat.id} id={chat.id} users={chat.data().users} user={user} />
+          <Chat key={chat.id}  id={chat.id} users={chat.data().users} user={user} />
         ))}
       </div>
     </Container>
