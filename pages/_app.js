@@ -25,23 +25,31 @@ function MyApp({ Component, pageProps }) {
       )}
   }, [user])
 
-  setTimeout(function () {
+  
+  // const countdown = 6
+
+  // function redCountdown(){
+  //   countdown - 1
+  // }
+  // while (countdown > 0) {
+  //   setTimeout(function () {
+  //     redCountdown()
+  //   }, 100)
+  // }
+  
+  
+  if(loading) {
+
     return <Loading/>
   }
-  ,6000
-  )
-  
-  
-  
-  if(loading) return <Loading/>
   
   
 
   if (!user) {
     return <Login/>
   }
-
   return <Component {...pageProps} />
+
 }
 
 export default MyApp

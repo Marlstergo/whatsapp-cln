@@ -85,7 +85,9 @@ function Sidebar() {
 
 export default Sidebar;
 
-const Container = styled.div``;
+const Container = styled.div`
+  border-right: 2px solid gray;
+`;
 const Header = styled.div`
   display: flex;
   position: sticky;

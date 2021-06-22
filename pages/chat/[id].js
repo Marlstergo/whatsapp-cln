@@ -13,7 +13,7 @@ function Chat({messages, chat}) {
       <Sidebar/>
       <div className="flex flex-col w-full">
         <div className="screen flex-1 overflow-y-scroll h-screen">
-          <ChatScreen/>
+          <ChatScreen chat={chat} messages={messages}/>
         </div>
       </div>
 
