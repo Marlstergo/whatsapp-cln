@@ -13,10 +13,12 @@ import { IconButton } from "@material-ui/core";
 import { useCollection, useCollectionData } from "react-firebase-hooks/firestore";
 
 import Message from '../components/Messages'
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 import firebase from "firebase";
 import getRecipientEmail from "../utils/getRecipientEmail";
+
+import TimeAgo from 'timeago-react'
 
 function ChatScreen({ chat, messages }) {
   const [user] = useAuthState(auth);
@@ -72,22 +74,32 @@ function ChatScreen({ chat, messages }) {
     })
 
     setInput("")
+    scrollToBottom()
+
+
   }
   const recipientEmail = getRecipientEmail(chat.users, user)
 
   const [recipientSnapshot] = useCollection(
     db.collection('users').where('email', '==', getRecipientEmail(chat.users, user))
   )
-  console.log(recipientSnapshot)
+  // console.log(recipientSnapshot.docs.[0].data())
   const recipient = recipientSnapshot?.docs?.[0]?.data()
-  // console.log(recipient?.photoURL)
+  // console.log(recipient?.photo)
+  const endOfMessageRef = useRef(null)
+  const scrollToBottom = () => {
+    endOfMessageRef.current.scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    })
+  }
   return (
     <div className="h-screen flex flex-col">
-      <div className="header h-14 flex w-full items-center justify-between px-4 sticky top-0">
+      <div className="header h-14 flex w-full items-center justify-between px-4 sticky top-0 bg-white z-50">
         <div className="">
           {
             recipient ? (
-              <Avatar src={recipient?.photoURL} />
+              <Avatar src={recipient?.photo} />
             ) : (
               <Avatar>{recipientEmail[0]}</Avatar>
             )
@@ -95,8 +107,21 @@ function ChatScreen({ chat, messages }) {
           {/* <Avatar /> */}
         </div>
         <div className="flex flex-col ml-5 flex-1">
-          <p className="">last seen:</p>
+          
           <p className="">{recipientEmail}</p>
+          {
+            recipientSnapshot ? (
+              <p>Last Active: {' '}
+                {
+                  recipient?.lastSeen?.toDate() ? (
+                    <TimeAgo datetime={recipient?.lastSeen?.toDate()} />
+                  ) : "unavailable"
+                }
+              </p>
+            ) : (
+              <p>Loaading last active....</p>
+            )
+          }
         </div>
         <div className="icon space-x-3 mr-3">
           <IconButton>
@@ -108,10 +133,11 @@ function ChatScreen({ chat, messages }) {
         </div>
       </div>
       <div className="message-area flex flex-col flex-1">
-        <div className="flex-1 bg-chat  bg-cover bg-bottom">
+        <div className="h-full bg-chat  bg-cover bg-bottom">
           {showMessages()}
+          <div ref={endOfMessageRef} className="messageend mb-10"></div>
         </div>
-        <div className="endofmessage sticky bottom-0 py-3 h-14">
+        <div className="endofmessage z-50 bg-white sticky bottom-0 py-3 h-14">
           <form className="flex w-full items-center  ">
             <IconButton className="mx-4">
               <EmojiEmotions />
