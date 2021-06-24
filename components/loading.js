@@ -8,10 +8,10 @@ function Loading() {
   return (
     <center>
       <div className='h-screen flex flex-col justify-center items-center'>
-        <img
+        <Logo
           src='https://th.bing.com/th/id/OIP.dD3KjCmsUWT72iB1LQmgfAHaHa?w=174&h=180&c=7&o=5&pid=1.7'
           height={200}
-          alt=''
+          alt='chat'
           style={{ marginBottom: '10px' }}
         />
         <Circle color='#3CBC28'/>    
@@ -29,4 +29,9 @@ export default Loading
 
 const Maliq = styled.p`
 
+`
+const Logo = styled.img`
+  height: 200px;
+  width: 200px;
+  margin-bottom: 50px;
 `
