@@ -10,7 +10,7 @@ import {
   MoreVert,
 } from "@material-ui/icons";
 import { IconButton } from "@material-ui/core";
-import { useCollection } from "react-firebase-hooks/firestore";
+import { useCollection, useCollectionData } from "react-firebase-hooks/firestore";
 
 import Message from '../components/Messages'
 import { useState } from "react";
@@ -32,13 +32,13 @@ function ChatScreen({ chat, messages }) {
 
   const showMessages = () => {
     if(messagesSnapshot) {
-      return messagesSnapshot.docs.map((message) => (
+      return messagesSnapshot.docs.map((msg) => (
         <Message
-          key = {message.id}
-          user = {message.data().user}
+          key = {msg.id}
+          user = {msg.data().user}
           message = {{
-            ...message.data,
-            timestamp: message.data().timestamp?.toDate().getTime()
+            ...msg.data(),
+            timestamp: msg.data().timestamp?.toDate().getTime()
           }}
         />
       ))
@@ -75,11 +75,24 @@ function ChatScreen({ chat, messages }) {
   }
   const recipientEmail = getRecipientEmail(chat.users, user)
 
+  const [recipientSnapshot] = useCollection(
+    db.collection('users').where('email', '==', getRecipientEmail(chat.users, user))
+  )
+  console.log(recipientSnapshot)
+  const recipient = recipientSnapshot?.docs?.[0]?.data()
+  // console.log(recipient?.photoURL)
   return (
     <div className="h-screen flex flex-col">
       <div className="header h-14 flex w-full items-center justify-between px-4 sticky top-0">
         <div className="">
-          <Avatar />
+          {
+            recipient ? (
+              <Avatar src={recipient?.photoURL} />
+            ) : (
+              <Avatar>{recipientEmail[0]}</Avatar>
+            )
+          }
+          {/* <Avatar /> */}
         </div>
         <div className="flex flex-col ml-5 flex-1">
           <p className="">last seen:</p>

@@ -9,7 +9,7 @@ import getRecipientEmail from "../../utils/getRecipientEmail";
 function Chat({ messages, chat }) {
 
   const [user] = useAuthState(auth)
-  console.log(user)
+  // console.log(user)
   return (
     <div className=" flex h-screen">
       <Head>
@@ -54,7 +54,7 @@ export async function getServerSideProps(context) {
     id: chatRes.id,
     ...chatRes.data(),
   };
-  console.log(chat, messages);
+  // console.log( messages);
   return {
     props: {
       messages: JSON.stringify(messages),
