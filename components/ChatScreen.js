@@ -151,7 +151,7 @@ function ChatScreen({ chat, messages }) {
       <div className="message-area flex flex-col flex-1">
         <div className="h-full bg-chat w-full md:w-7/12 lg:w-8/12 fixed bg-cover bg-bottom overflow-y-scroll pt-12">
           {showMessages()}
-          <div ref={endOfMessageRef} className="messageend h-14 bg-gray-900">ewee</div>
+          <div ref={endOfMessageRef} className="messageend h-32 "></div>
         </div>
         <div className="endofmessage z-50 bg-white fixed w-full lg:w-8/12 bottom-0 py-3 h-14">
           <form className="flex  w-full md:w-7/12 lg:w-full items-center  ">
