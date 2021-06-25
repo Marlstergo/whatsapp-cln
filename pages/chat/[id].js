@@ -18,7 +18,7 @@ function Chat({ messages, chat }) {
       <div className="flex-shrink hidden md:block invisible md:visible md:w-5/12 lg:w-4/12 overflow-scroll ">
         <Sidebar />
       </div>
-      <div className="flex flex-col w-full">
+      <div className="flex flex-col md:w-7/12 lg:w-8/12">
         <div className="screen flex-1 overflow-y-scroll h-screen">
           <ChatScreen chat={chat} messages={messages} />
         </div>

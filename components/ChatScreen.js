@@ -98,14 +98,14 @@ function ChatScreen({ chat, messages }) {
     })
 
   }
-  
+
   const goBack = () => {
     router.push(`/`)
     // console.log('pusshed')
   }
   return (
-    <div className="h-screen flex flex-col">
-      <div className="header h-14 flex w-full items-center justify-between px-4 sticky top-0 bg-white z-50">
+    <div className="h-screen flex flex-col w-full relative">
+      <div className="header h-14 w-full md:w-7/12 lg:w-8/12 flex items-center justify-between px-4 fixed top-0 bg-white z-50">
         <div className="mr-2 " onClick={goBack}>
         <IconButton className=''>
           <ArrowBackIos/>
@@ -124,7 +124,7 @@ function ChatScreen({ chat, messages }) {
         </div>
         <div className="flex flex-col ml-5 flex-1">
           
-          <p className="">{recipientEmail}</p>
+          <p className="overflow-ellipsis">{recipientEmail}</p>
           {
             recipientSnapshot ? (
               <p>Last Active: {' '}
@@ -139,7 +139,7 @@ function ChatScreen({ chat, messages }) {
             )
           }
         </div>
-        <div className="icon space-x-3 mr-3">
+        <div className="icon space-x-3 flex mr-3">
           <IconButton>
             <AttachFileOutlined />
           </IconButton>
@@ -149,17 +149,17 @@ function ChatScreen({ chat, messages }) {
         </div>
       </div>
       <div className="message-area flex flex-col flex-1">
-        <div className="h-full bg-chat  bg-cover bg-bottom">
+        <div className="h-full bg-chat w-full md:w-7/12 lg:w-8/12 fixed bg-cover bg-bottom overflow-y-scroll pt-12">
           {showMessages()}
-          <div ref={endOfMessageRef} className="messageend mb-10"></div>
+          <div ref={endOfMessageRef} className="messageend h-14 bg-gray-900">ewee</div>
         </div>
-        <div className="endofmessage z-50 bg-white sticky bottom-0 py-3 h-14">
-          <form className="flex w-full items-center  ">
+        <div className="endofmessage z-50 bg-white fixed w-full lg:w-8/12 bottom-0 py-3 h-14">
+          <form className="flex  w-full md:w-7/12 lg:w-full items-center  ">
             <IconButton className="mx-4">
               <EmojiEmotions />
             </IconButton>
             <input
-              className="flex-1 px-6 py-4 bg-gray-100 focus:ring-0 focus:outline-none rounded-2xl"
+              className="flex-1 px-6 py-4 mb-3 bg-gray-100 focus:ring-0 focus:outline-none rounded-2xl"
               type="text"
               name="message"
               id="message"
