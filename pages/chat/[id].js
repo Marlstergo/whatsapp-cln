@@ -15,7 +15,9 @@ function Chat({ messages, chat }) {
       <Head>
         <title>Chat with {getRecipientEmail(chat.users, user)}</title>
       </Head>
-      <Sidebar />
+      <div className="flex-shrink hidden md:block invisible md:visible md:w-5/12 lg:w-4/12 overflow-scroll ">
+        <Sidebar />
+      </div>
       <div className="flex flex-col w-full">
         <div className="screen flex-1 overflow-y-scroll h-screen">
           <ChatScreen chat={chat} messages={messages} />

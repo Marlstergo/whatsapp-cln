@@ -8,7 +8,8 @@ import {
   EmojiEmotions,
   MicRounded,
   MoreVert,
-  Send
+  Send,
+  ArrowBackIos
 } from "@material-ui/icons";
 import { IconButton } from "@material-ui/core";
 import { useCollection, useCollectionData } from "react-firebase-hooks/firestore";
@@ -95,10 +96,22 @@ function ChatScreen({ chat, messages }) {
       behavior: "smooth",
       block: "start"
     })
+
+  }
+  
+  const goBack = () => {
+    router.push(`/`)
+    // console.log('pusshed')
   }
   return (
     <div className="h-screen flex flex-col">
       <div className="header h-14 flex w-full items-center justify-between px-4 sticky top-0 bg-white z-50">
+        <div className="mr-2 " onClick={goBack}>
+        <IconButton className=''>
+          <ArrowBackIos/>
+        </IconButton>
+
+        </div>
         <div className="">
           {
             recipient ? (

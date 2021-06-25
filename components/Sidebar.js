@@ -52,7 +52,7 @@ function Sidebar() {
     // }
   };
   return (
-    <Container>
+    <div className='flex flex-col overflow-hidden w-full'>
       <Header>
         <UseAvatar src={user.photoURL}
           onClick={() => {
@@ -74,12 +74,12 @@ function Sidebar() {
         <SearchInput placeholder="Search in chats" />
       </Search>
       <SidebarButton onClick={createchat}>Start a new chat</SidebarButton>
-      <div className="flex flex-col ">
+      <div className="flex flex-col w-full ">
         {chatsSnapshot?.docs.map((chat) => (
-          <Chat key={chat.id}  id={chat.id} users={chat.data().users} user={user} />
+          <Chat className='w-full' key={chat.id}  id={chat.id} users={chat.data().users} user={user} />
         ))}
       </div>
-    </Container>
+    </div>
   );
 }
 

@@ -28,7 +28,7 @@ function Chat({id, users, user }) {
         recipent? <Avatar className="mx-5" src={recipent?.photo} />
         : <Avatar className="mx-5"> {recipentEmail[0]} </Avatar>
       }
-      <p className="">  {recipentEmail}</p>
+      <p className="w-full break-all">  {recipentEmail}</p>
     </div>
   );
 }
