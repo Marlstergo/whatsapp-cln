@@ -8,6 +8,7 @@ import {
   EmojiEmotions,
   MicRounded,
   MoreVert,
+  Send
 } from "@material-ui/icons";
 import { IconButton } from "@material-ui/core";
 import { useCollection, useCollectionData } from "react-firebase-hooks/firestore";
@@ -58,12 +59,14 @@ function ChatScreen({ chat, messages }) {
 
   const sendMessage = (e) =>{
     e.preventDefault()
-
+    // db.collection("users").doc(user.uid).update
     db.collection("users").doc(user.uid).set({
+      
+      lastSeen: firebase.firestore.FieldValue.serverTimestamp(),
 
-      lastseen: firebase.firestore.FieldValue.serverTimestamp(),
-
-    })
+    },
+    {merge: true}
+    )
 
     db.collection("chats").doc(router.query.id).collection('messages').add({
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
@@ -153,7 +156,10 @@ function ChatScreen({ chat, messages }) {
                 (e) => setInput(e.target.value)
               }
             />
-            <button hidden disabled={!input} type="submit" onClick={sendMessage} >Send Message</button>
+            <IconButton className="mx-8 flex items-center justify-center">
+            <button  disabled={!input} type="submit" onClick={sendMessage} ><Send className=''/></button>
+            </IconButton>
+
             <IconButton className="mx-8">
               <MicRounded />
             </IconButton>
